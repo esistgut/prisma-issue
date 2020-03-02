@@ -1,0 +1,21 @@
+{
+  "name": "prisma-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prismation": "npx prisma2 generate && rm -rf prisma/generated/type-graphql/resolvers && npx prisma2 migrate save --experimental && npx prisma2 migrate up --experimental"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma2": "^2.0.0-preview022",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.0.0-preview022"
+  }
+}

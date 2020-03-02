@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prismation": "npx prisma2 generate && rm -rf prisma/generated/type-graphql/resolvers && npx prisma2 migrate save --experimental && npx prisma2 migrate up --experimental"
+    "prismation": "npx prisma2 generate && npx prisma2 migrate save --experimental && npx prisma2 migrate up --experimental"
   },
   "keywords": [],
   "author": "",

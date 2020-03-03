@@ -11,16 +11,6 @@ generator client {
 model Service {
   description     String?
   id              Int       @default(autoincrement()) @id
-  owner           User      @relation("ownerServices")
-  sourceService   Service?  @relation("services")
-  targetServices  Service[] @relation("services")
-
-  @@index([owner])
-  @@index([sourceService])
-}
-
-model User {
-  email              String      @default("") @unique
-  id                 Int         @default(autoincrement()) @id
-  name               String      @default("")
+  sourceService   Service?  @relation(name: "services")
+  targetServices  Service[] @relation(name: "services")
 }

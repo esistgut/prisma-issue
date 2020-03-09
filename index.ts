@@ -3,31 +3,35 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function populate() {
+  const u1 = await prisma.user.create({
+    data: {name: 'Alice'}
+  })
+  const u2 = await prisma.user.create({
+    data: {name: 'Bob'}
+  })
   const s = await prisma.service.create({
     data: {
-      description: "My Service 1"
+      owner: {connect: {id: u1.id}},
+      code: 'samecode',
+      description: 'My Service 1'
     }
   })
   await prisma.service.create({
     data: {
-      sourceService: { connect: { id: s.id } },
-      description: "My Service 2"
+      owner: {connect: {id: u2.id}},
+      code: 'samecode',
+      description: 'My Service 2'
     }
   })
 }
 
 async function test() {
-  const s = (await prisma.service.findMany({
-    where: { description: "My Service 1" }
-  }))[0];
-  if (s) {
-    const targets = await prisma.service.findMany({
-      where: {
-        sourceService: { id: s.id },
-      }
-    });
-    console.log(targets);
-  }
+  const s = await prisma.service.findOne({
+    where: {
+      owner_code: {code: 'samecode'}
+    }
+  })
+  console.log(s);
 }
 
 async function main() {
